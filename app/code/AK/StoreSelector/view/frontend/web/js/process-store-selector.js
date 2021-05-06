@@ -7,7 +7,8 @@ define([
     'jquery',
     'Magento_Ui/js/modal/modal',
     'mage/mage',
-    'jquery/ui'
+    'jquery/ui',
+    'jquery/jquery.cookie'
 ], function ($, modal) {
     'use strict';
 
@@ -29,11 +30,17 @@ define([
                 };
 
             modal(popup_store_options, this.element);
+            var store_selector = $.cookie('store_selector');
 
-            setTimeout(function() {
+            $("#store-selector").on('click',function(){
                 self.element.modal('openModal');
-            }, 2000);
+            });
 
+            if(store_selector != 1){
+                setTimeout(function() {
+                    self.element.modal('openModal');
+                }, 2000);
+            }
         },
     });
 

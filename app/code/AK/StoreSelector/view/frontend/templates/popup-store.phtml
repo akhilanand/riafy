@@ -14,7 +14,7 @@
 
 <?php
 
-if ($block->isHomePage()):
+//if ($block->isHomePage()):
 
     $stores = $block->getStores();
     $storesNotInList = [0,1]
@@ -50,6 +50,9 @@ if ($block->isHomePage()):
             font-size: 16px;
             font-weight: 600;
         }
+        #store-selector{
+            cursor: pointer;
+          }
     </style>
     <div class="block store store-content" id="popup-store" style="display:none">
         <div class="intro">
@@ -74,8 +77,13 @@ if ($block->isHomePage()):
     </script>
 
     <script>
-        require(['jquery', 'jquery/ui'], function($){
+        require(['jquery',
+            'jquery/ui',
+            'jquery/jquery.cookie'
+        ], function($){
             $('.store-sbumit').click(function () {
+                console.log($.cookie('store_selector'));
+                $.cookie('store_selector', '1', { expires: 7, path: '/' });
                 var id = $(this).data("id");
                 var name = $(this).data("name");
                 var code = $(this).data("code");
@@ -92,4 +100,4 @@ if ($block->isHomePage()):
         });
     </script>
 
-<?php endif; ?>
+<?php //endif; ?>
